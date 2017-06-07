@@ -3,8 +3,6 @@
 
 int main()
 {
-    std::cout << "Hello, World!" << std::endl;
-
     Go();
 
     std::cout << "Finish." << std::endl;

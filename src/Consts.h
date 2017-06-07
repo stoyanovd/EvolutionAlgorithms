@@ -4,11 +4,11 @@
 
 const int CHROMOSOME_SIZE = 10;
 
-const int POPULATION_SIZE = 10;
+const int POPULATION_SIZE = 500;
 
 //////////////////////////////////////////////////////////////////////////////
 
-const int CROSSINGOVERS_NUMBER = 2;
+const int CROSSINGOVERS_NUMBER = 1;
 
 const double CROSSINGOVERS_PROBABILITY = 0.5;
 
@@ -16,4 +16,4 @@ const double MUTATION_PROBABILITY = 0.001;
 
 //////////////////////////////////////////////////////////////////////////////
 
-const int EPOCHS_NUMBER = 20;
+const int EPOCHS_NUMBER = 20000;

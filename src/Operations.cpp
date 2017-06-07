@@ -1,7 +1,6 @@
-#include <assert.h>
-#include "Basis.h"
-#include "WeightRandGenerator.h"
+#include "Operations.h"
 
+#include "WeightRandGenerator.h"
 
 Population Reproduction(Population &p, FitnessFunction func)
 {
@@ -35,7 +34,6 @@ void Crossingover(Population &p)
         size_t second = rand() % p.individuals.size();
         size_t sep_point = rand() % CHROMOSOME_SIZE;
         ExchangeGenes(p.individuals[first], p.individuals[second], sep_point);
-        assert("You dont update it");
     }
 }
 
@@ -49,6 +47,5 @@ void Mutation(Population &p)
         }
         size_t sep_point = rand() % CHROMOSOME_SIZE;
         individual[sep_point] = (gene) (!individual[sep_point]);
-        assert("You dont update it");
     }
 }

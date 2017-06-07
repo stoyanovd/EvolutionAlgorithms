@@ -5,20 +5,19 @@
 class WeightRandGenerator
 {
 public:
-    WeightRandGenerator(Population &p, FitnessFunction func);
+    WeightRandGenerator(const Population &p, FitnessFunction func);
 
-    size_t GetIndex();
     std::vector<size_t> GetMultipleIndex();
 
-    using cur_double = FValue ;
+    using FValue_double = double;
 
 private:
-    inline cur_double GetValue()
+    inline FValue_double GetRandInPartialMax()
     {
-        return (cur_double) rand() / RAND_MAX * partial_sums.back();
+        return (FValue_double) rand() / RAND_MAX * partial_sums.back();
     }
 
-    std::vector<cur_double> partial_sums;
+    std::vector<FValue_double> partial_sums;
 };
 
 inline double GetRandInOne()
