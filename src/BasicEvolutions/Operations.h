@@ -2,7 +2,7 @@
 
 #include "Basis.h"
 
-Population Reproduction(Population &p, FitnessFunction func);
+Population Reproduction(Population &p, FitnessFunction func, WeighterFunction weighter);
 
 void Crossingover(Population &p);
 

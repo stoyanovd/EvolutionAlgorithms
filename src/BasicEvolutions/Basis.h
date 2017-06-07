@@ -13,6 +13,9 @@ using Chromosome = std::array<gene, CHROMOSOME_SIZE>;
 using FValue = int;
 using FitnessFunction = FValue(*)(const Chromosome &);
 
+using WeightValue = double;
+using WeighterFunction = WeightValue(*)(const FValue &);
+
 using IsBetterFunction = bool (*)(const FValue &, const FValue &);
 
 // TODO you may want WeighterFunc

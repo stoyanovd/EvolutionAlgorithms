@@ -3,30 +3,33 @@
 #include <algorithm>
 #include <cassert>
 
-WeightRandGenerator::WeightRandGenerator(const Population &p, FitnessFunction func)
+WeightRandGenerator::WeightRandGenerator(const Population &p, FitnessFunction fitness, WeighterFunction weighter)
 {
-    std::vector<FValue> fitness;
-    fitness.reserve(p.individuals.size());
+    std::vector<WeightValue> weights;
+    weights.reserve(p.individuals.size());
     for (const auto &individual : p.individuals)
     {
-//        fitness.push_back((*func.get())(individual));
-        fitness.push_back(func(individual));
+        auto w = weighter(fitness(individual));
+//        fitness.push_back((*fitness.get())(individual));
+        weights.push_back(w);
     }
-    for (int i = 0; i < (int)p.individuals.size(); i++)
+    for (int i = 0; i < (int) p.individuals.size(); i++)
     {
         if (i == 0)
         {
-            partial_sums.push_back((FValue_double) fitness[0]);
+            partial_sums.push_back(weights[0]);
         }
         else
-        { partial_sums.push_back(partial_sums[i - 1] + (FValue_double) fitness[i]); }
+        {
+            partial_sums.push_back(partial_sums[i - 1] + weights[i]);
+        }
     }
 }
 
 std::vector<size_t> WeightRandGenerator::GetMultipleIndex()
 {
     size_t N = partial_sums.size();
-    std::vector<FValue_double> values;
+    std::vector<WeightValue> values;
     values.reserve(N);
 
     for (size_t i = 0; i < N; i++)

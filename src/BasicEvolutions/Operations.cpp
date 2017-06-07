@@ -2,9 +2,9 @@
 
 #include "WeightRandGenerator.h"
 
-Population Reproduction(Population &p, FitnessFunction func)
+Population Reproduction(Population &p, FitnessFunction func, WeighterFunction weighter)
 {
-    WeightRandGenerator generator(p, func);
+    WeightRandGenerator generator(p, func, weighter);
     auto indexes = generator.GetMultipleIndex();
 
     Population result{};
