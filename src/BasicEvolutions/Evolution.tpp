@@ -1,11 +1,13 @@
+#pragma once
+
 #include <iostream>
 
-#include "Evolution.h"
 #include "Operations.h"
 
-Chromosome CreateRandomChromosome()
+template<int C>
+Chromosome<C> CreateRandomChromosome()
 {
-    Chromosome c = {};
+    Chromosome<C> c = {};
     for (auto &x : c)
     {
         x = (gene) (rand() % 2);
@@ -13,18 +15,20 @@ Chromosome CreateRandomChromosome()
     return std::move(c);
 }
 
-Population CreateRandomPopulation()
+template<int C, int P>
+Population<C, P> CreateRandomPopulation()
 {
     srand(time(NULL));
-    Population p = {};
-    for (int i = 0; i < POPULATION_SIZE; i++)
+    Population<C, P> p = {};
+    for (int i = 0; i < P; i++)
     {
-        p.individuals[i] = CreateRandomChromosome();
+        p.individuals[i] = CreateRandomChromosome<C>();
     }
     return std::move(p);
 }
 
-int GetBest(const Population &p, FitnessFunction func, WeighterFunction weighter)
+template<int C, int P>
+int GetBest(const Population<C, P> &p, FitnessFunction<C> func, WeighterFunction weighter)
 {
     int best = -1;
     WeightValue best_weight = 0;
@@ -41,17 +45,18 @@ int GetBest(const Population &p, FitnessFunction func, WeighterFunction weighter
     return best;
 }
 
-void Go(FitnessFunction func, WeighterFunction weighter, bool output)
+template<int C, int P>
+void Go(FitnessFunction<C> func, WeighterFunction weighter, bool output)
 {
     if (output)
     {
         std::cout << "Start evolution:" << std::endl;
-        std::cout << "CHROMOSOME_SIZE: " << CHROMOSOME_SIZE << std::endl;
-        std::cout << "POPULATION_SIZE: " << POPULATION_SIZE << std::endl;
+        std::cout << "C: " << C << std::endl;
+        std::cout << "POPULATION_SIZE: " << P << std::endl;
         std::cout << "EPOCHS_NUMBER: " << EPOCHS_NUMBER << std::endl;
     }
 
-    Population population = CreateRandomPopulation();
+    Population<C, P> population = CreateRandomPopulation<C, P>();
 
     for (int i = 0; i < EPOCHS_NUMBER; i++)
     {

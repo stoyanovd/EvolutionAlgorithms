@@ -2,4 +2,7 @@
 
 #include "Basis.h"
 
-void Go(FitnessFunction func, WeighterFunction weighter, bool output);
+template<int C, int P>
+void Go(FitnessFunction<C> func, WeighterFunction weighter, bool output);
+
+#include "Evolution.tpp"

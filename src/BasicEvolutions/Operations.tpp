@@ -1,13 +1,15 @@
-#include "Operations.h"
+#pragma once
 
 #include "WeightRandGenerator.h"
 
-Population Reproduction(Population &p, FitnessFunction func, WeighterFunction weighter)
+
+template<int C, int P>
+Population<C, P> Reproduction(Population<C, P> &p, FitnessFunction<C> func, WeighterFunction weighter)
 {
     WeightRandGenerator generator(p, func, weighter);
     auto indexes = generator.GetMultipleIndex();
 
-    Population result{};
+    Population<C, P> result{};
     int j = 0;
     for (auto i : indexes)
     {
@@ -17,12 +19,14 @@ Population Reproduction(Population &p, FitnessFunction func, WeighterFunction we
     return result;
 }
 
-void ExchangeGenes(Chromosome &a, Chromosome &b, size_t sep_point)
+template<int C>
+void ExchangeGenes(Chromosome<C> &a, Chromosome<C> &b, int sep_point)
 {
     std::swap_ranges(a.begin() + sep_point, a.end(), b.begin() + sep_point);
 }
 
-void Crossingover(Population &p)
+template<int C, int P>
+void Crossingover(Population<C, P> &p)
 {
     for (int i = 0; i < CROSSINGOVERS_NUMBER; i++)
     {
@@ -30,14 +34,15 @@ void Crossingover(Population &p)
         {
             continue;
         }
-        size_t first = rand() % p.individuals.size();
-        size_t second = rand() % p.individuals.size();
-        size_t sep_point = rand() % CHROMOSOME_SIZE;
-        ExchangeGenes(p.individuals[first], p.individuals[second], sep_point);
+        int first = rand() % P;
+        int second = rand() % P;
+        int sep_point = rand() % C;
+        ExchangeGenes<C>(p.individuals[first], p.individuals[second], sep_point);
     }
 }
 
-void Mutation(Population &p)
+template<int C, int P>
+void Mutation(Population<C, P> &p)
 {
     for (auto &individual : p.individuals)
     {
@@ -45,7 +50,7 @@ void Mutation(Population &p)
         {
             continue;
         }
-        size_t sep_point = rand() % CHROMOSOME_SIZE;
+        int sep_point = rand() % C;
         individual[sep_point] = (gene) (!individual[sep_point]);
     }
 }

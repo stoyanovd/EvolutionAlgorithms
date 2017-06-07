@@ -8,18 +8,22 @@
 #include "Consts.h"
 
 using gene=unsigned char;
-using Chromosome = std::array<gene, CHROMOSOME_SIZE>;
+
+template<int C>
+using Chromosome = std::array<gene, C>;
 
 using FValue = int;
-using FitnessFunction = FValue(*)(const Chromosome &);
+
+template<int C>
+using FitnessFunction = FValue(*)(const Chromosome<C> &);
 
 using WeightValue = double;
+
 using WeighterFunction = WeightValue(*)(const FValue &);
 
-using IsBetterFunction = bool (*)(const FValue &, const FValue &);
+//using IsBetterFunction = bool (*)(const FValue &, const FValue &);
 
-// TODO you may want WeighterFunc
-
+template<int C, int P>
 class Population
 {
 public:
@@ -27,7 +31,5 @@ public:
     {
         individuals = {};
     }
-
-    // TODO think, maybe it can be unordered_set, but Roulette algo...
-    std::array<Chromosome, POPULATION_SIZE> individuals;
+    std::array<Chromosome<C>, P> individuals;
 };

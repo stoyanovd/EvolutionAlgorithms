@@ -2,8 +2,13 @@
 
 #include "Basis.h"
 
-Population Reproduction(Population &p, FitnessFunction func, WeighterFunction weighter);
+template<int C, int P>
+Population<C, P> Reproduction(Population<C, P> &p, FitnessFunction<C> func, WeighterFunction weighter);
 
-void Crossingover(Population &p);
+template<int C, int P>
+void Crossingover(Population<C, P> &p);
 
-void Mutation(Population &p);
+template<int C, int P>
+void Mutation(Population<C, P> &p);
+
+#include "Operations.tpp"

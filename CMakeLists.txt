@@ -10,7 +10,7 @@ HunterGate(
 
 project(EvoAlgo)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 hunter_add_package(Sugar)
 include("${SUGAR_ROOT}/cmake/Sugar")
@@ -19,7 +19,7 @@ include("${SUGAR_ROOT}/cmake/Sugar")
 #unset(CMAKE_CXX_FLAGS CACHE)
 if (CMAKE_COMPILER_IS_GNUCXX)
 
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall" CACHE STRING COMPILE_FLAGS FORCE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall" CACHE STRING COMPILE_FLAGS FORCE)
     #    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -g" CACHE STRING COMPILE_FLAGS FORCE)
 
     set(CMAKE_CXX_FLAGS_RELEASE

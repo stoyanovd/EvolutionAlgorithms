@@ -11,7 +11,8 @@ class WeightRandGenerator
 {
 public:
 
-    WeightRandGenerator(const Population &p, FitnessFunction fitness, WeighterFunction weighter);
+    template<int C, int P>
+    WeightRandGenerator(const Population<C, P> &p, FitnessFunction<C> fitness, WeighterFunction weighter);
 
     std::vector<size_t> GetMultipleIndex();
 
@@ -23,3 +24,5 @@ private:
 
     std::vector<WeightValue> partial_sums;
 };
+
+#include "WeightRandGenerator.tpp"

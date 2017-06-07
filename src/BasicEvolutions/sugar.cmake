@@ -8,11 +8,11 @@ include(sugar_include)
 include(sugar_files)
 
 sugar_files(BasicEvolutions_SOURCES
-        Operations.cpp
+        Operations.tpp
         Basis.h
         WeightRandGenerator.cpp
         WeightRandGenerator.h
-        Evolution.cpp
+        Evolution.tpp
         Evolution.h
         Consts.h
         CustomFunctions.h
